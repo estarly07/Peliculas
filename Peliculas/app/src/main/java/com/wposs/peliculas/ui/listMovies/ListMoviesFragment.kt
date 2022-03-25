@@ -19,7 +19,7 @@ class ListMoviesFragment : Fragment() {
     }
 
     private lateinit var listBinding: FragmentListMoviesBinding
-    private val listModel :ListViewModel by viewModels()
+    private          val listModel  : ListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
