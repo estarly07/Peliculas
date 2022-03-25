@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    style="@style/background"
-    android:layout_height="match_parent"
-    tools:context=".ui.listMovies.ListMoviesFragment">
+<layout>
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.listMovies.ListMoviesFragment">
 
+        <include
+            android:id="@+id/home"
+            layout="@layout/home" />
 
-</RelativeLayout>
+        <include
+            android:id="@+id/favorites"
+            layout="@layout/favorites" />
+    </RelativeLayout>
+</layout>
