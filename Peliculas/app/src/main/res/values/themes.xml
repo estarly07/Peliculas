@@ -27,4 +27,9 @@
         <item name="drawableTint">@color/navigation_icon</item>
         <item name="android:textColor">@color/navigation_icon</item>
     </style>
+    <style name="navigation_icon_select"  parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="drawableTint">@color/navigation_icon_select</item>
+        <item name="android:textColor">@color/navigation_icon_select</item>
+    </style>
 </resources>
