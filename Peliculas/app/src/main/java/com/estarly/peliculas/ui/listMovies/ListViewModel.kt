@@ -1,4 +1,4 @@
-package com.wposs.peliculas.ui.listMovies
+package com.estarly.peliculas.ui.listMovies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

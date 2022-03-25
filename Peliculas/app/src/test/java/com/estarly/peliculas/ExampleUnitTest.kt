@@ -1,4 +1,4 @@
-package com.wposs.peliculas
+package com.estarly.peliculas
 
 import org.junit.Test
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listMoviesFragment"
-        android:name="com.wposs.peliculas.ui.listMovies.ListMoviesFragment"
+        android:name="com.estarly.peliculas.ui.listMovies.ListMoviesFragment"
         android:label="fragment_list_movies"
         tools:layout="@layout/fragment_list_movies" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutMovieFragment"
-        android:name="com.wposs.peliculas.ui.aboutMovie.AboutMovieFragment"
+        android:name="com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment"
         android:label="fragment_about_movie"
         tools:layout="@layout/fragment_about_movie" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.wposs.peliculas.ui.listMovies
+package com.estarly.peliculas.ui.listMovies
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import com.wposs.peliculas.R
-import com.wposs.peliculas.databinding.FragmentListMoviesBinding
+import com.estarly.peliculas.R
+import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 
 
 class ListMoviesFragment : Fragment() {
