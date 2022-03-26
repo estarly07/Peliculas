@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.estarly.peliculas.MainActivity
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.FragmentAboutMovieBinding
 import com.estarly.peliculas.databinding.FragmentListMoviesBinding
@@ -43,6 +44,10 @@ class ListMoviesFragment : Fragment() {
         return listBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        MainActivity.callback(true)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listeners()
@@ -59,6 +64,7 @@ class ListMoviesFragment : Fragment() {
         adapterMovie.setClick(object:MovieAdapter.Click{
             override fun onClick(movie: Movie, view: View) {
                 AboutMovieFragment.setMovie( movie)
+                MainActivity.callback(false)
                 NavHostFragment.findNavController(this@ListMoviesFragment).navigate(R.id.listMovies_to_aboutMovie)
             }
 
