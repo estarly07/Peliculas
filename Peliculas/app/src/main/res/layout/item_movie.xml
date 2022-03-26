@@ -16,6 +16,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="@dimen/_150"
+            android:id="@+id/imgMovie"
             android:layout_height="@dimen/_200"
             android:layout_centerInParent="true"
             app:riv_corner_radius="15dp" />

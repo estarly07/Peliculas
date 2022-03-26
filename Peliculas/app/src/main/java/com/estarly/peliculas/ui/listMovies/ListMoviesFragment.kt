@@ -46,11 +46,10 @@ class ListMoviesFragment : Fragment() {
 
     private fun startObservers() {
         listModel.listMovies.observe(viewLifecycleOwner,{ list->
-            println(list)
-//            adapterMovie.setListMovies(list)
-//            listBinding.home.recyclerMovies.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-//            listBinding.home.recyclerMovies.setHasFixedSize(true)
-//            listBinding.home.recyclerMovies.adapter = adapterMovie
+            adapterMovie.setListMovies(list)
+            listBinding.home.recyclerMovies.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            listBinding.home.recyclerMovies.setHasFixedSize(true)
+            listBinding.home.recyclerMovies.adapter = adapterMovie
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
             println(list)

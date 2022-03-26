@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.ItemMovieBinding
+import com.estarly.peliculas.domain.models.Movie
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    private lateinit var listMovies: List<String>
+    private lateinit var listMovies: List<Movie>
 
-    fun setListMovies(list: List<String>) {
+    fun setListMovies(list: List<Movie>) {
         listMovies = list
     }
 
@@ -22,8 +25,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Glide.with(holder.itemView.context)
+            .load("https://image.tmdb.org/t/p/w500${listMovies[position].posterPath}")
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.movieBinding.imgMovie)
     }
 
     override fun getItemCount(): Int = listMovies.size
-    class ViewHolder(movieBinding: ItemMovieBinding) : RecyclerView.ViewHolder(movieBinding.root)
+    class ViewHolder(var movieBinding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(movieBinding.root)
 }
