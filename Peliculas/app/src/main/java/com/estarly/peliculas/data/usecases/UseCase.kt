@@ -37,4 +37,17 @@ class UseCase {
         val json = gson.toJson(call.execute().body())
         return gson.fromJson(json, type)
     }
+    fun getMovieUpcoming():  List<Movie>? {
+        val call: Call<Map<String, Any>> = movieApi.getMovieUpcoming(
+            mapOf(
+                "api_key"  to GlobalUtils.apiKey,
+                "language" to GlobalUtils.language,
+                "query"    to "B"
+            )
+        )
+        val type = object : TypeToken<List<Movie>>() {}.type
+        val gson = GsonBuilder().create()
+        val json = gson.toJson(call.execute().body()?.get("results"))
+        return gson.fromJson(json, type)
+    }
 }

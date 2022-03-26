@@ -5,7 +5,7 @@
             <size android:width="150dp" android:height="50dp" />
             <gradient
                 android:startColor="@color/transparent"
-                android:endColor="@color/shadow_bar"
+                android:endColor="@color/navigation_icon_select"
                 android:centerColor="@color/transparent"
                 android:angle="270" />
         </shape>

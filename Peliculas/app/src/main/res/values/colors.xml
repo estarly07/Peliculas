@@ -21,7 +21,7 @@
     <color name="navigation_bar">#9FFFFFFF</color>
     <color name="navigation_icon">#202020</color>
     <color name="navigation_icon_night">#FFFFFFFF</color>
-    <color name="navigation_icon_select">#D13024</color>
+    <color name="navigation_icon_select">#B0DD2C00</color>
     <color name="shadow_bar">#DD2C00</color>
 
     <color name="gray">#4C4C4C</color>

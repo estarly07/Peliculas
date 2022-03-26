@@ -5,4 +5,6 @@
     <string name="home">Menu</string>
     <string name="favorite">Favoritos</string>
     <string name="play">Ver Pelicula</string>
+    <string name="popular">Populares</string>
+    <string name="upcoming">Proximos</string>
 </resources>

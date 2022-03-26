@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,6 +21,7 @@ import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
+import com.estarly.peliculas.utils.listenerScroll
 
 
 class ListMoviesFragment : Fragment() {
@@ -27,9 +30,10 @@ class ListMoviesFragment : Fragment() {
         lateinit var navigation: (page: String) -> Unit
     }
 
-    private lateinit var listBinding : FragmentListMoviesBinding
-    private          val listModel   : ListViewModel by viewModels()
-    private          var adapterMovie: MovieAdapter = MovieAdapter()
+    private lateinit var listBinding    : FragmentListMoviesBinding
+    private          val listModel      : ListViewModel by viewModels()
+    private          var adapterMovie   : MovieAdapter = MovieAdapter()
+    private          var adapterUpcoming: MovieAdapter = MovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,24 +60,27 @@ class ListMoviesFragment : Fragment() {
     }
 
     private fun getters() {
-        listModel.getMovies()
-        listModel.getMovieLatest()
+        listModel.getMovies       ()
+        listModel.getMovieLatest  ()
+        listModel.getMovieUpcoming()
     }
 
-    private fun startObservers() {
-        adapterMovie.setClick(object:MovieAdapter.Click{
-            override fun onClick(movie: Movie, view: View) {
-                AboutMovieFragment.setMovie( movie)
-                MainActivity.callback(false)
-                NavHostFragment.findNavController(this@ListMoviesFragment).navigate(R.id.listMovies_to_aboutMovie)
-            }
 
-        })
+    private fun startObservers() {
+        listBinding.home.scrollHome.listenerScroll { MainActivity.callback.invoke(it) }
         listModel.listMovies.observe(viewLifecycleOwner,{ list->
             adapterMovie.setListMovies(list)
-            listBinding.home.recyclerMovies.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            listBinding.home.recyclerMoviesPopular.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            listBinding.home.recyclerMoviesPopular.setHasFixedSize(true)
+            listBinding.home.recyclerMoviesPopular.adapter = adapterMovie
+        })
+        listModel.listMoviesUpcoming.observe(viewLifecycleOwner,{ list->
+            adapterUpcoming.setListMovies(list)
+            listBinding.home.recyclerMovies.layoutManager = GridLayoutManager(context,3)
             listBinding.home.recyclerMovies.setHasFixedSize(true)
-            listBinding.home.recyclerMovies.adapter = adapterMovie
+            listBinding.home.recyclerMovies.isNestedScrollingEnabled = true
+
+            listBinding.home.recyclerMovies.adapter = adapterUpcoming
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
             println(list)
@@ -98,6 +105,15 @@ class ListMoviesFragment : Fragment() {
                 listBinding.favorites.visibility = View.VISIBLE
             }
         }
+        adapterMovie   .listenerMovieAdapter()
+        adapterUpcoming.listenerMovieAdapter()
     }
-
+    private fun MovieAdapter.listenerMovieAdapter() =
+        this.setClick(object:MovieAdapter.Click{
+            override fun onClick(movie: Movie, view: View) {
+                AboutMovieFragment.setMovie( movie)
+                MainActivity.callback(false)
+                NavHostFragment.findNavController(this@ListMoviesFragment).navigate(R.id.listMovies_to_aboutMovie)
+            }
+        })
 }

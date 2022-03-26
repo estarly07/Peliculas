@@ -10,8 +10,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
-    val useCase             = UseCase()
+    private val useCase     = UseCase()
+
     var listMovies          = MutableLiveData<List<Movie>>()
+    var listMoviesUpcoming  = MutableLiveData<List<Movie>>()
     var listMoviesFavorites = MutableLiveData<List<String>>()
     val movieLatest         = MutableLiveData<Movie>()
 
@@ -24,6 +26,9 @@ class ListViewModel : ViewModel() {
         }
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {
             movieLatest.postValue(useCase.getMovieLatest())
+        }
+    fun getMovieUpcoming() = CoroutineScope(Dispatchers.IO).launch {
+            listMoviesUpcoming.postValue(useCase.getMovieUpcoming())
         }
 
 

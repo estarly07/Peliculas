@@ -2,6 +2,7 @@
 <layout>
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,6 +29,28 @@
 
             </RelativeLayout>
 
+            <TextView
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10"
+                android:text="@string/popular"
+                android:textSize="@dimen/_25sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMoviesPopular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10"
+                android:text="@string/upcoming"
+                android:textSize="@dimen/_25sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMovies"
