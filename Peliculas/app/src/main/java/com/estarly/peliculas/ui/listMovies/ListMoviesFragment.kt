@@ -42,9 +42,13 @@ class ListMoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         listeners()
         startObservers()
+        getters()
+
+    }
+
+    private fun getters() {
         listModel.getMovies()
         listModel.getMovieLatest()
-
     }
 
     private fun startObservers() {
@@ -59,7 +63,8 @@ class ListMoviesFragment : Fragment() {
         })
         listModel.movieLatest.observe(viewLifecycleOwner,{ movie->
             Glide.with(context)
-                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+//                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+                .load("https://media.revistagq.com/photos/6062c654c19ff438270c5fc3/16:9/w_2560%2Cc_limit/gvk-3.png")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(  listBinding.home.imgMovieLatest)
 

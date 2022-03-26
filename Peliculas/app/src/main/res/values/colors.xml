@@ -10,6 +10,9 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="transparent_two">#B0595959</color>
+    <color name="transparentBlack" >#B5000000</color>
+    <color name="transparentBlack_two" >#4F000000</color>
+    <color name="transparentWhite_two" >#12FFFFFF</color>
 
     <color name="background">#FFFFFFFF</color>
     <color name="background_night">#FF000000</color>
@@ -19,7 +22,7 @@
     <color name="navigation_icon">#202020</color>
     <color name="navigation_icon_night">#FFFFFFFF</color>
     <color name="navigation_icon_select">#D13024</color>
-    <color name="shadow_bar">#FB8C00</color>
+    <color name="shadow_bar">#DD2C00</color>
 
     <color name="gray">#4C4C4C</color>
 

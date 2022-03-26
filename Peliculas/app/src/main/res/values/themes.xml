@@ -20,7 +20,12 @@
     <style name="background"  parent="Theme.AppCompat.NoActionBar">
         <item name="android:background">@color/background</item>
     </style>
-
+    <style name="effect"  parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@drawable/efecto_traslucido_light</item>
+    </style>
+    <style name="effect_two"  parent="Theme.AppCompat.NoActionBar">
+        <item name="android:src">@color/transparentWhite_two</item>
+    </style>
 
     <style name="navigation_icon"  parent="Theme.AppCompat.NoActionBar">
         <item name="android:background">@color/transparent</item>

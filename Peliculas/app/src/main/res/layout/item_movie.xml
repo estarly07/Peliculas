@@ -14,11 +14,25 @@
             android:layout_margin="@dimen/_10"
             android:src="@drawable/ic_home" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <RelativeLayout
             android:layout_width="@dimen/_150"
-            android:id="@+id/imgMovie"
-            android:layout_height="@dimen/_200"
-            android:layout_centerInParent="true"
-            app:riv_corner_radius="15dp" />
+            android:layout_height="@dimen/_200">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgMovie"
+                android:layout_width="@dimen/_150"
+                android:layout_height="@dimen/_200"
+                android:layout_centerInParent="true"
+                app:riv_corner_radius="15dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                style="@style/effect_two"
+                android:layout_width="@dimen/_150"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                app:riv_corner_radius="15dp" />
+
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

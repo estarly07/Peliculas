@@ -15,7 +15,7 @@ class ListViewModel : ViewModel() {
     var listMoviesFavorites = MutableLiveData<List<String>>()
     val movieLatest         = MutableLiveData<Movie>()
 
-    fun getMovies() = GlobalScope.launch(Dispatchers.Default) {
+    fun getMovies() = GlobalScope.launch(Dispatchers.IO) {
             listMovies.postValue(useCase.getMovies())
         }
 
