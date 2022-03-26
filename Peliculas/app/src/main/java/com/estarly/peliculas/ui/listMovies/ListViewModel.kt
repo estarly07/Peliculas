@@ -18,17 +18,23 @@ class ListViewModel : ViewModel() {
     val movieLatest         = MutableLiveData<Movie>()
 
     fun getMovies() = GlobalScope.launch(Dispatchers.IO) {
-            listMovies.postValue(useCase.getMovies())
+            listMovies.postValue(
+                if(listMovies.value?.isEmpty() == true || listMovies.value == null )
+                    useCase.getMovies()
+                else listMovies.value)
         }
 
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.Main).launch {
             listMoviesFavorites.value = listOf("","")
         }
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {
-            movieLatest.postValue(useCase.getMovieLatest())
+            movieLatest.postValue(if(movieLatest.value == null) useCase.getMovieLatest()else movieLatest.value)
         }
     fun getMovieUpcoming() = CoroutineScope(Dispatchers.IO).launch {
-            listMoviesUpcoming.postValue(useCase.getMovieUpcoming())
+            listMoviesUpcoming.postValue(
+                if(listMoviesUpcoming.value?.isEmpty() == true || listMovies.value == null )
+                    useCase.getMovieUpcoming()
+                else listMoviesUpcoming.value)
         }
 
 

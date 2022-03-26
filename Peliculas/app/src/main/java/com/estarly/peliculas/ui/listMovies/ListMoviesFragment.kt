@@ -25,9 +25,12 @@ import com.estarly.peliculas.utils.listenerScroll
 
 
 class ListMoviesFragment : Fragment() {
-
+    enum class Pages{
+        HOME,FAVORITES,HANDLING
+    }
+    private var page:Pages = Pages.HANDLING
     companion object {
-        lateinit var navigation: (page: String) -> Unit
+        lateinit var navigation: (page: Pages) -> Unit
     }
 
     private lateinit var listBinding    : FragmentListMoviesBinding
@@ -60,6 +63,7 @@ class ListMoviesFragment : Fragment() {
     }
 
     private fun getters() {
+        navigation.invoke(Pages.HANDLING)
         listModel.getMovies       ()
         listModel.getMovieLatest  ()
         listModel.getMovieUpcoming()
@@ -73,6 +77,8 @@ class ListMoviesFragment : Fragment() {
             listBinding.home.recyclerMoviesPopular.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
             listBinding.home.recyclerMoviesPopular.setHasFixedSize(true)
             listBinding.home.recyclerMoviesPopular.adapter = adapterMovie
+            if(page!=Pages.FAVORITES)
+                navigation.invoke(Pages.HOME)
         })
         listModel.listMoviesUpcoming.observe(viewLifecycleOwner,{ list->
             adapterUpcoming.setListMovies(list)
@@ -81,6 +87,8 @@ class ListMoviesFragment : Fragment() {
             listBinding.home.recyclerMovies.isNestedScrollingEnabled = true
 
             listBinding.home.recyclerMovies.adapter = adapterUpcoming
+            if(page!=Pages.FAVORITES)
+                navigation.invoke(Pages.HOME)
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
             println(list)
@@ -97,13 +105,20 @@ class ListMoviesFragment : Fragment() {
 
     private fun listeners() {
         navigation = {
-            if (it == "HOME") {
-                listBinding.home.root.visibility = View.VISIBLE
-                listBinding.favorites.visibility = View.GONE
-            } else {
-                listBinding.home.root.visibility = View.GONE
-                listBinding.favorites.visibility = View.VISIBLE
+            page = it
+            listBinding.page = page
+            
+            when(it){
+                Pages.HOME->{
+                }
+                Pages.FAVORITES->{
+
+                }
+                Pages.HANDLING->{
+
+                }
             }
+
         }
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()

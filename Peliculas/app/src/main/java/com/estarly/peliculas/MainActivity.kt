@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
 
     fun activeButtonsBar(){
         mainBinding.btnHome.setOnClickListener {
-            ListMoviesFragment.navigation("HOME")
+            ListMoviesFragment.navigation(ListMoviesFragment.Pages.HOME)
         }
         mainBinding.btnFavorites.setOnClickListener {
-            ListMoviesFragment.navigation("FAVORITE")
+            ListMoviesFragment.navigation(ListMoviesFragment.Pages.FAVORITES)
         }
     }
 

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="com.estarly.peliculas.ui.listMovies.ListMoviesFragment.Pages" />
+
+        <variable
+            name="page"
+            type="com.estarly.peliculas.ui.listMovies.ListMoviesFragment.Pages" />
+    </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -11,18 +21,30 @@
 
         <include
             android:id="@+id/home"
+            android:visibility="@{(page==Pages.HOME)? View.VISIBLE:View.GONE,default=gone}"
             layout="@layout/home" />
 
         <include
             android:id="@+id/favorites"
+            android:visibility="@{(page==Pages.FAVORITES)? View.VISIBLE:View.GONE,default=gone}"
             layout="@layout/favorites" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/handling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{(page==Pages.HANDLING)? View.VISIBLE:View.GONE,default=gone}"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/wait" />
 
         <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10"
-           >
+            android:layout_margin="@dimen/_10">
+
             <ImageView
                 android:layout_width="@dimen/_40"
                 android:layout_height="@dimen/_40"
@@ -31,8 +53,8 @@
 
             <ImageView
                 android:layout_width="@dimen/_20"
-                android:layout_alignParentRight="true"
                 android:layout_height="@dimen/_20"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/ic_home" />
         </RelativeLayout>
     </RelativeLayout>
