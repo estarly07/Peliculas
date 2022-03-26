@@ -9,4 +9,8 @@ interface MoviesApi {
     fun getMovies(
         @QueryMap params: Map<String, String>,
         ): Call<Map<String, Any>>
+    @GET("/3/movie/latest")
+    fun getMovieLatest(
+        @QueryMap params: Map<String, String>,
+        ): Call<Map<String, Any>>
 }

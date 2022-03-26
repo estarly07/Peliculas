@@ -10,25 +10,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="400dp">
 
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="350dp"
-                    android:background="@color/teal_200" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerMovies"
+                <ImageView
+                    android:id="@+id/imgMovieLatest"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
 
-            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMovies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

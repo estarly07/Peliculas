@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.ui.adapters.MovieAdapter
@@ -41,6 +43,7 @@ class ListMoviesFragment : Fragment() {
         listeners()
         startObservers()
         listModel.getMovies()
+        listModel.getMovieLatest()
 
     }
 
@@ -53,6 +56,13 @@ class ListMoviesFragment : Fragment() {
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
             println(list)
+        })
+        listModel.movieLatest.observe(viewLifecycleOwner,{ movie->
+            Glide.with(context)
+                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(  listBinding.home.imgMovieLatest)
+
         })
     }
 
