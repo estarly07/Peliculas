@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</RelativeLayout>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10">
+
+        <ImageView
+            android:layout_width="@dimen/_20"
+            android:layout_height="@dimen/_20"
+            android:layout_margin="@dimen/_10"
+            android:src="@drawable/ic_home" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="@dimen/_150"
+            android:layout_height="@dimen/_200"
+            android:layout_centerInParent="true"
+            app:riv_corner_radius="15dp" />
+    </RelativeLayout>
+</layout>

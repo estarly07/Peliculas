@@ -19,6 +19,7 @@
     <color name="navigation_icon">#202020</color>
     <color name="navigation_icon_night">#FFFFFFFF</color>
     <color name="navigation_icon_select">#D13024</color>
+    <color name="shadow_bar">#FB8C00</color>
 
     <color name="gray">#4C4C4C</color>
 

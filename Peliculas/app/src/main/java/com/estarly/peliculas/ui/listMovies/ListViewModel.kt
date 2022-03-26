@@ -11,7 +11,7 @@ class ListViewModel : ViewModel() {
     var listMoviesFavorites = MutableLiveData<List<String>>()
 
     fun getMovies() = CoroutineScope(Dispatchers.Main).launch {
-            listMovies.value = listOf("","")
+            listMovies.value = listOf("","","","","","")
         }
 
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.Main).launch {

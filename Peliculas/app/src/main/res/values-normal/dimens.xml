@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--TEXTO-->
+    <dimen name="_15sp" tools:ignore="MissingDefaultResource">15sp</dimen>
+    <dimen name="_20sp" tools:ignore="MissingDefaultResource">20sp</dimen>
+    <dimen name="_25sp" tools:ignore="MissingDefaultResource">25sp</dimen>
+    <dimen name="_30sp" tools:ignore="MissingDefaultResource">30sp</dimen>
+    <dimen name="_35sp" tools:ignore="MissingDefaultResource">35sp</dimen>
+
+    <dimen name="_10"  tools:ignore="MissingDefaultResource">10dp</dimen>
+    <dimen name="_20"  tools:ignore="MissingDefaultResource">20dp</dimen>
+    <dimen name="_150" tools:ignore="MissingDefaultResource">150dp</dimen>
+    <dimen name="_200" tools:ignore="MissingDefaultResource">200dp</dimen>
+</resources>

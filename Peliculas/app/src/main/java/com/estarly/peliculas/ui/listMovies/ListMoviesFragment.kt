@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.FragmentListMoviesBinding
+import com.estarly.peliculas.ui.adapters.MovieAdapter
 
 
 class ListMoviesFragment : Fragment() {
@@ -17,8 +19,9 @@ class ListMoviesFragment : Fragment() {
         lateinit var navigation: (page: String) -> Unit
     }
 
-    private lateinit var listBinding: FragmentListMoviesBinding
-    private          val listModel  : ListViewModel by viewModels()
+    private lateinit var listBinding : FragmentListMoviesBinding
+    private          val listModel   : ListViewModel by viewModels()
+    private          var adapterMovie: MovieAdapter = MovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,10 @@ class ListMoviesFragment : Fragment() {
 
     private fun startObservers() {
         listModel.listMovies.observe(viewLifecycleOwner,{ list->
-            println(list)
+            adapterMovie.setListMovies(list)
+            listBinding.home.recyclerMovies.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            listBinding.home.recyclerMovies.setHasFixedSize(true)
+            listBinding.home.recyclerMovies.adapter = adapterMovie
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
             println(list)
@@ -53,10 +59,10 @@ class ListMoviesFragment : Fragment() {
     private fun listeners() {
         navigation = {
             if (it == "HOME") {
-                listBinding.home.visibility = View.VISIBLE
+                listBinding.home.root.visibility = View.VISIBLE
                 listBinding.favorites.visibility = View.GONE
             } else {
-                listBinding.home.visibility = View.GONE
+                listBinding.home.root.visibility = View.GONE
                 listBinding.favorites.visibility = View.VISIBLE
             }
         }
