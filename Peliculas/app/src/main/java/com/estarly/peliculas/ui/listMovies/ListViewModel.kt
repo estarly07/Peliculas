@@ -2,16 +2,20 @@ package com.estarly.peliculas.ui.listMovies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.estarly.peliculas.data.usecases.UseCase
+import com.estarly.peliculas.domain.models.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
-    var listMovies          = MutableLiveData<List<String>>()
+    val useCase             = UseCase()
+    var listMovies          = MutableLiveData<List<Movie>>()
     var listMoviesFavorites = MutableLiveData<List<String>>()
 
-    fun getMovies() = CoroutineScope(Dispatchers.Main).launch {
-            listMovies.value = listOf("","","","","","")
+    fun getMovies() = GlobalScope.launch(Dispatchers.Default) {
+            listMovies.postValue(useCase.getMovies())
         }
 
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.Main).launch {
