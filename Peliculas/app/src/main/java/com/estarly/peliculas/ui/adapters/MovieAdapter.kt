@@ -27,6 +27,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(holder.itemView.context)
             .load("https://image.tmdb.org/t/p/w500${listMovies[position].posterPath}")
+            .error(R.drawable.no_found)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.movieBinding.imgMovie)
     }

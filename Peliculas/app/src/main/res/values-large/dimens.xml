@@ -9,6 +9,11 @@
 
     <dimen name="_10"  tools:ignore="MissingDefaultResource">15dp</dimen>
     <dimen name="_20"  tools:ignore="MissingDefaultResource">25dp</dimen>
+    <dimen name="_25"  tools:ignore="MissingDefaultResource">30dp</dimen>
+    <dimen name="_30"  tools:ignore="MissingDefaultResource">35dp</dimen>
+    <dimen name="_40"  tools:ignore="MissingDefaultResource">45dp</dimen>
+    <dimen name="_60"  tools:ignore="MissingDefaultResource">65dp</dimen>
+    <dimen name="_80"  tools:ignore="MissingDefaultResource">85dp</dimen>
     <dimen name="_150" tools:ignore="MissingDefaultResource">160dp</dimen>
     <dimen name="_200" tools:ignore="MissingDefaultResource">210dp</dimen>
 </resources>

@@ -63,8 +63,8 @@ class ListMoviesFragment : Fragment() {
         })
         listModel.movieLatest.observe(viewLifecycleOwner,{ movie->
             Glide.with(context)
-//                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
-                .load("https://media.revistagq.com/photos/6062c654c19ff438270c5fc3/16:9/w_2560%2Cc_limit/gvk-3.png")
+                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+                .placeholder(R.drawable.defect_one)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(  listBinding.home.imgMovieLatest)
 

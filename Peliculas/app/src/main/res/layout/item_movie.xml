@@ -8,11 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10">
 
-        <ImageView
-            android:layout_width="@dimen/_20"
-            android:layout_height="@dimen/_20"
-            android:layout_margin="@dimen/_10"
-            android:src="@drawable/ic_home" />
 
         <RelativeLayout
             android:layout_width="@dimen/_150"
@@ -22,6 +17,7 @@
                 android:id="@+id/imgMovie"
                 android:layout_width="@dimen/_150"
                 android:layout_height="@dimen/_200"
+                android:scaleType="centerCrop"
                 android:layout_centerInParent="true"
                 app:riv_corner_radius="15dp" />
 
@@ -34,5 +30,7 @@
                 app:riv_corner_radius="15dp" />
 
         </RelativeLayout>
+
+
     </RelativeLayout>
 </layout>
