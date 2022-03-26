@@ -14,9 +14,9 @@ class UseCase {
     fun getMovies(): List<Movie>? {
         val call: Call<Map<String, Any>> = movieApi.getMovies(
             mapOf(
-                "api_key" to GlobalUtils.apiKey,
+                "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query" to "B"
+                "query"    to "B"
             )
         )
         val type = object : TypeToken<List<Movie>>() {}.type
@@ -27,9 +27,9 @@ class UseCase {
     fun getMovieLatest(): Movie? {
         val call: Call<Map<String, Any>> = movieApi.getMovieLatest(
             mapOf(
-                "api_key" to GlobalUtils.apiKey,
+                "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query" to "B"
+                "query"    to "B"
             )
         )
         val type = object : TypeToken<Movie>() {}.type

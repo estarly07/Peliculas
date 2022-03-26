@@ -7,11 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.estarly.peliculas.R
+import com.estarly.peliculas.databinding.FragmentAboutMovieBinding
 import com.estarly.peliculas.databinding.FragmentListMoviesBinding
+import com.estarly.peliculas.domain.models.Movie
+import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
 
 
@@ -43,7 +48,6 @@ class ListMoviesFragment : Fragment() {
         listeners()
         startObservers()
         getters()
-
     }
 
     private fun getters() {
@@ -52,6 +56,13 @@ class ListMoviesFragment : Fragment() {
     }
 
     private fun startObservers() {
+        adapterMovie.setClick(object:MovieAdapter.Click{
+            override fun onClick(movie: Movie, view: View) {
+                AboutMovieFragment.setMovie( movie)
+                NavHostFragment.findNavController(this@ListMoviesFragment).navigate(R.id.listMovies_to_aboutMovie)
+            }
+
+        })
         listModel.listMovies.observe(viewLifecycleOwner,{ list->
             adapterMovie.setListMovies(list)
             listBinding.home.recyclerMovies.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)

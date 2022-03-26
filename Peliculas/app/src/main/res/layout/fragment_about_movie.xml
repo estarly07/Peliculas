@@ -1,15 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/background"
-    tools:context=".ui.aboutMovie.AboutMovieFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="movie"
+            type="com.estarly.peliculas.domain.models.Movie" />
+
+    </data>
+
+    <RelativeLayout
+        style="@style/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200">
+
+                    <ImageView
+                        android:id="@+id/imgMovie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <RelativeLayout
+                        style="@style/effect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="@dimen/_20"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/textPrimary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{movie.title}"
+                            android:textSize="@dimen/_25sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/textSeconary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{movie.originalTitle}"
+                            android:textSize="@dimen/_15sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_rounded"
+                        android:backgroundTint="@color/shadow_bar"
+                        android:text="@string/play"
+                        android:layout_marginHorizontal="@dimen/_20"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/btn_rounded"
+                        style="@style/floating"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="@dimen/_20"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/_20"
+                            android:layout_height="@dimen/_20"
+                            android:tint="@color/white"
+                            android:src="@drawable/ic_star"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_20"
+                    android:text="@{movie.overview}"
+                    android:textSize="@dimen/_15sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
+</layout>

@@ -1,6 +1,7 @@
 package com.estarly.peliculas.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,15 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
         listMovies = list
     }
 
+    interface Click {
+        fun onClick(movie: Movie, view: View)
+    }
+
+    private lateinit var click: Click
+    fun setClick(click: Click) {
+        this.click = click
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val movieDataBinding =
@@ -30,6 +40,12 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
             .error(R.drawable.no_found)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.movieBinding.imgMovie)
+        holder.itemView.setOnClickListener {
+            click.onClick(
+                movie = listMovies[position],
+                view  = it
+            )
+        }
     }
 
     override fun getItemCount(): Int = listMovies.size
