@@ -12,11 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.FragmentAboutMovieBinding
-import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.adapters.MovieAdapter
-import com.estarly.peliculas.ui.listMovies.ListMoviesFragment
-import com.estarly.peliculas.ui.listMovies.ListViewModel
 import com.estarly.peliculas.utils.getTypeRotation
 
 
@@ -24,7 +21,7 @@ class AboutMovieFragment : Fragment() {
     private lateinit var aboutBinding : FragmentAboutMovieBinding
     private          val aboutModel   : AboutViewModel by viewModels()
     private          val adapterMovie = MovieAdapter()
-    private var isFavorite = false
+    private          var isFavorite   = false
     companion object {
         private lateinit var movie: Movie
         fun setMovie(movie: Movie) {
@@ -43,20 +40,18 @@ class AboutMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        aboutBinding.wait = false
         aboutBinding.movie = movie
         adapterMovie.setClick(object : MovieAdapter.Click{
             override fun onClick(movie: Movie, view: View) {
-                aboutBinding.wait = true
                 AboutMovieFragment.movie = movie
                 aboutBinding.movie       = movie
                 getData()
             }
-
         })
 
         getData()
         aboutModel.listMoviesSimilar.observe(viewLifecycleOwner,{list->
+            aboutBinding.isEmptyList = list.isEmpty()
             adapterMovie.setListMovies(list)
             aboutBinding.recyclerMoviesSimilar.layoutManager = GridLayoutManager(context,
                 if (context!!.getTypeRotation()) 3 else 4)
@@ -64,31 +59,20 @@ class AboutMovieFragment : Fragment() {
             aboutBinding.recyclerMoviesSimilar.isNestedScrollingEnabled = true
 
             aboutBinding.recyclerMoviesSimilar.adapter = adapterMovie
-            aboutBinding.wait = false
         })
-        aboutModel.isFavorite.observe(viewLifecycleOwner,{
-            isFavorite = it
-            aboutBinding.btnStar.visibility = View.VISIBLE
-            if(it)
-                aboutBinding.star.playAnimation()
-        })
+
         aboutBinding.btnStar.setOnClickListener {
-            if (isFavorite){
-                aboutBinding.star.progress =0f
-                aboutBinding.star.pauseAnimation()
+            if (!isFavorite){
+                aboutModel.insertMovie(movie)
+            }else{
                 aboutModel.deleteMovie(movie)
             }
-            else{
-                aboutBinding.star.playAnimation()
-                aboutModel.insertMovie(movie)
-            }
             isFavorite = !isFavorite
+            animateStar(isFavorite)
         }
     }
 
     private fun getData() {
-        aboutBinding.btnStar.visibility = View.INVISIBLE
-        aboutModel.getMovie(movie.id)
         aboutBinding.scroll.post { aboutBinding.scroll.scrollTo(0,  0) }
         Glide.with(context)
             .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
@@ -96,6 +80,17 @@ class AboutMovieFragment : Fragment() {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(aboutBinding.imgMovie)
         aboutModel.getMoviesSimilar(requireContext(),movie.id.toString())
+        isFavorite = aboutModel.getMovie(movie.id,requireContext())
+        animateStar(isFavorite)
+
     }
 
+    private fun animateStar(isFavorite : Boolean){
+        if (isFavorite){
+            aboutBinding.star.playAnimation()
+        }else{
+            aboutBinding.star.progress =0f
+            aboutBinding.star.pauseAnimation()
+        }
+    }
 }

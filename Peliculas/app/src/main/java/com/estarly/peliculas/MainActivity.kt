@@ -11,6 +11,7 @@ import com.estarly.peliculas.utils.animTranslateToBottomOrUp
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     companion object{
+        // callback para mostrar la barra de navegacion
         lateinit var callback       :(isUp:Boolean)->Unit
     }
 

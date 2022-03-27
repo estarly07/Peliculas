@@ -11,11 +11,15 @@ import com.estarly.peliculas.utils.GlobalUtils
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import retrofit2.Call
+import java.io.IOException
+import kotlin.Throws
 
 class UseCase(context: Context) {
     private val movieApi : MoviesApi = RetrofitHelper.getRetrofit().create(MoviesApi::class.java)
     private var movieDao : MovieDao  = SqliteDb.getInstance(context).movieDao()
-    fun getMovies(): List<Movie>? {
+
+    @Throws(IOException::class)
+    fun getMovies(): List<Movie> {
         val call: Call<Map<String, Any>> = movieApi.getMovies(
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
@@ -28,7 +32,8 @@ class UseCase(context: Context) {
         val json = gson.toJson(call.execute().body()?.get("results"))
         return gson.fromJson(json, type)
     }
-    fun getMovieLatest(): Movie? {
+    @Throws(IOException::class)
+    fun getMovieLatest(): Movie {
         val call: Call<Map<String, Any>> = movieApi.getMovieLatest(
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
@@ -41,7 +46,8 @@ class UseCase(context: Context) {
         val json = gson.toJson(call.execute().body())
         return gson.fromJson(json, type)
     }
-    fun getMovieUpcoming():  List<Movie>? {
+    @Throws(IOException::class)
+    fun getMovieUpcoming():  List<Movie> {
         val call: Call<Map<String, Any>> = movieApi.getMovieUpcoming(
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
@@ -54,7 +60,8 @@ class UseCase(context: Context) {
         val json = gson.toJson(call.execute().body()?.get("results"))
         return gson.fromJson(json, type)
     }
-    fun getMovieSimilar(idMovie: String):  List<Movie>? {
+    @Throws(IOException::class)
+    fun getMovieSimilar(idMovie: String):  List<Movie> {
         val call: Call<Map<String, Any>> = movieApi.getMovieSimilar(
             idMovie,
             mapOf(
@@ -75,7 +82,7 @@ class UseCase(context: Context) {
     suspend fun insertMovie (movieEntity: MovieEntity) : Long{
         return movieDao.registerMovie(movieEntity)
     }
-    suspend fun getMovie (idMovie: Long) : MovieEntity?{
+    fun getMovie (idMovie: Long) : MovieEntity?{
         return movieDao.getMovie(idMovie)
     }
     suspend fun deleteMovie (idMovie: Long) {

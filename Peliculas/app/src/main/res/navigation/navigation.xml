@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_list_movies" >
         <action
             android:id="@+id/listMovies_to_aboutMovie"
-            app:destination="@id/aboutMovieFragment" />
+            app:destination="@id/aboutMovieFragment"
+            app:enterAnim="@anim/anim_appear"
+            app:popEnterAnim="@anim/anim_appear"
+            app:popExitAnim="@anim/anim_vanish"
+  />
     </fragment>
     <fragment
         android:id="@+id/aboutMovieFragment"

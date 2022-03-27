@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/background"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/textPrimary"
+        <LinearLayout
+            style="@style/background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10"
-            android:layout_marginTop="@dimen/_60"
-            android:text="@string/favoriteMovies"
-            android:textSize="@dimen/_25sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerMoviesFavorites"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <TextView
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10"
+                android:layout_marginTop="@dimen/_60"
+                android:text="@string/favoriteMovies"
+                android:textSize="@dimen/_25sp"
+                android:textStyle="bold" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMoviesFavorites"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
         <include
             android:id="@+id/noFound"
-            android:visibility="gone"
-            layout="@layout/no_found" />
-    </LinearLayout>
+            layout="@layout/no_found"
+            android:visibility="gone" />
+    </RelativeLayout>
+
 </layout>

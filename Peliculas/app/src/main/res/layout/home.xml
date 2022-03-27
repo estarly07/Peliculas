@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isEmptyPopular"
+            type="Boolean" />
+
+        <variable
+            name="isEmptyUpcoming"
+            type="Boolean" />
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/noFound"
-            layout="@layout/no_found"
-            android:visibility="gone" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollHome"
             style="@style/background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+           >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,12 +56,14 @@
                     android:layout_marginStart="@dimen/_10"
                     android:text="@string/popular"
                     android:textSize="@dimen/_25sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="@{(isEmptyPopular == true)? View.GONE:View.VISIBLE,default=gone}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerMoviesPopular"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:visibility="@{(isEmptyPopular == true)? View.GONE:View.VISIBLE,default=gone}" />
 
                 <TextView
                     style="@style/textPrimary"
@@ -60,16 +72,23 @@
                     android:layout_marginStart="@dimen/_10"
                     android:text="@string/upcoming"
                     android:textSize="@dimen/_25sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="@{(isEmptyUpcoming == true)? View.GONE:View.VISIBLE,default=gone}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerMovies"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:visibility="@{(isEmptyUpcoming == true)? View.GONE:View.VISIBLE,default=gone}" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/noFound"
+            layout="@layout/no_found"
+            android:visibility="gone" />
+
     </RelativeLayout>
 
 </layout>

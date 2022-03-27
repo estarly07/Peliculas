@@ -10,28 +10,34 @@ import com.estarly.peliculas.utils.movieToMovieEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class AboutViewModel : ViewModel() {
     private lateinit var useCase  :UseCase
     var listMoviesSimilar = MutableLiveData<List<Movie>>()
-    var isFavorite        = MutableLiveData<Boolean>()
-
 
     fun getMoviesSimilar(context: Context, idMovie:String) = GlobalScope.launch(Dispatchers.IO) {
         useCase = UseCase(context)
-        listMoviesSimilar.postValue(
-            if(listMoviesSimilar.value?.isEmpty() == true || listMoviesSimilar.value == null )
-                useCase.getMovieSimilar(idMovie)
-            else listMoviesSimilar.value)
+        if(listMoviesSimilar.value?.isEmpty() == true || listMoviesSimilar.value == null ) {
+            try {
+                val resp = useCase.getMovieSimilar(idMovie)/*listOf<Movie>()*/
+                listMoviesSimilar.postValue(resp)
+            }catch (e: IOException){
+                e.printStackTrace()
+                listMoviesSimilar.postValue(listOf())
+            }
+
+        }
+
     }
 
     fun insertMovie(movie: Movie) = GlobalScope.launch(Dispatchers.Main) {
         useCase.insertMovie(movie.movieToMovieEntity())
 
     }
-    fun getMovie(idMovie: Long) = GlobalScope.launch(Dispatchers.Main) {
-        isFavorite.postValue(useCase.getMovie(idMovie)!=null)
-
+    fun getMovie(idMovie: Long,context: Context) : Boolean {
+        useCase = UseCase(context)
+        return  useCase.getMovie(idMovie)!=null
     }
 
     fun deleteMovie(movie: Movie) = GlobalScope.launch(Dispatchers.Main) {
