@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.estarly.peliculas.data.usecases.UseCase
 import com.estarly.peliculas.domain.models.Movie
+import com.estarly.peliculas.utils.movieEntityListToMovieList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,7 +30,8 @@ class ListViewModel : ViewModel() {
         }
 
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.IO).launch {
-            listMoviesFavorites.postValue(useCase.getFavoritesMovies() as List<Movie>)
+            Thread.sleep(2000)
+            listMoviesFavorites.postValue(useCase.getFavoritesMovies().movieEntityListToMovieList())
         }
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {
             movieLatest.postValue(if(movieLatest.value == null) useCase.getMovieLatest()else movieLatest.value)

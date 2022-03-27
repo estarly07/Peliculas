@@ -75,7 +75,7 @@
                             style="@style/textSeconary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{movie.originalTitle}"
+                            android:text="@{movie.original_title}"
                             android:textSize="@dimen/_15sp" />
 
                     </LinearLayout>
@@ -102,6 +102,7 @@
                         style="@style/floating"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:id="@+id/btnStar"
                         android:layout_marginHorizontal="@dimen/_20"
                         android:background="@drawable/btn_rounded"
                         android:gravity="center">

@@ -2,17 +2,17 @@
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/background"
         android:orientation="vertical">
 
         <TextView
             style="@style/textPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40"
             android:layout_marginStart="@dimen/_10"
+            android:layout_marginTop="@dimen/_60"
             android:text="@string/favoriteMovies"
             android:textSize="@dimen/_25sp"
             android:textStyle="bold" />
@@ -21,5 +21,10 @@
             android:id="@+id/recyclerMoviesFavorites"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/noFound"
+            android:visibility="gone"
+            layout="@layout/no_found" />
     </LinearLayout>
 </layout>

@@ -11,18 +11,18 @@ data class MovieEntity(
     @ColumnInfo(name = "adult")
     val adult: Boolean,
     @NonNull
-    @ColumnInfo(name = "backdropPath")
-    val backdropPath: String,
+    @ColumnInfo(name = "backdrop_path")
+    val backdrop_path: String,
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     val id: Long,
     @NonNull
-    @ColumnInfo(name = "originalLanguage")
-    val originalLanguage: String,
+    @ColumnInfo(name = "original_language")
+    val original_language: String,
     @NonNull
-    @ColumnInfo(name = "originalTitle")
-    val originalTitle: String,
+    @ColumnInfo(name = "original_title")
+    val original_title: String,
     @NonNull
     @ColumnInfo(name = "overview")
     val overview: String,
@@ -30,11 +30,11 @@ data class MovieEntity(
     @ColumnInfo(name = "popularity")
     val popularity: Double,
     @NonNull
-    @ColumnInfo(name = "posterPath")
-    val posterPath: String,
+    @ColumnInfo(name = "poster_path")
+    val poster_path: String,
     @NonNull
-    @ColumnInfo(name = "releaseDate")
-    val releaseDate: String,
+    @ColumnInfo(name = "release_date")
+    val release_date: String,
     @NonNull
     @ColumnInfo(name = "title")
     val title: String,
@@ -42,10 +42,10 @@ data class MovieEntity(
     @ColumnInfo(name = "video")
     val video: Boolean,
     @NonNull
-    @ColumnInfo(name = "voteAverage")
-    val voteAverage: Double,
+    @ColumnInfo(name = "vote_average")
+    val vote_average: Double,
     @NonNull
-    @ColumnInfo(name = "voteCount")
-    val voteCount: Long
+    @ColumnInfo(name = "vote_count")
+    val vote_count: Long
 )
 

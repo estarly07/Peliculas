@@ -9,9 +9,9 @@ import com.estarly.peliculas.ui.listMovies.ListMoviesFragment
 import com.estarly.peliculas.utils.animTranslateToBottomOrUp
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mainBinding: ActivityMainBinding
+    private lateinit var mainBinding: ActivityMainBinding
     companion object{
-        lateinit var callback:(isUp:Boolean)->Unit
+        lateinit var callback       :(isUp:Boolean)->Unit
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity() {
                 duration = 200L
             )
         }
+
     }
 
-    fun activeButtonsBar(){
+    private fun activeButtonsBar(){
         mainBinding.btnHome.setOnClickListener {
             ListMoviesFragment.navigation(ListMoviesFragment.Pages.HOME)
         }
