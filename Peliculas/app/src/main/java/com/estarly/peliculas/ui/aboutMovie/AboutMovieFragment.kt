@@ -17,6 +17,7 @@ import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.adapters.MovieAdapter
 import com.estarly.peliculas.ui.listMovies.ListMoviesFragment
 import com.estarly.peliculas.ui.listMovies.ListViewModel
+import com.estarly.peliculas.utils.getTypeRotation
 
 
 class AboutMovieFragment : Fragment() {
@@ -57,7 +58,8 @@ class AboutMovieFragment : Fragment() {
         getData()
         aboutModel.listMoviesSimilar.observe(viewLifecycleOwner,{list->
             adapterMovie.setListMovies(list)
-            aboutBinding.recyclerMoviesSimilar.layoutManager = GridLayoutManager(context,3)
+            aboutBinding.recyclerMoviesSimilar.layoutManager = GridLayoutManager(context,
+                if (context!!.getTypeRotation()) 3 else 4)
             aboutBinding.recyclerMoviesSimilar.setHasFixedSize(true)
             aboutBinding.recyclerMoviesSimilar.isNestedScrollingEnabled = true
 

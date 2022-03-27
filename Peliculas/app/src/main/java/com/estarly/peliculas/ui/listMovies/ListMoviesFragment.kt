@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,12 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.estarly.peliculas.MainActivity
 import com.estarly.peliculas.R
-import com.estarly.peliculas.databinding.FragmentAboutMovieBinding
 import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
-import com.estarly.peliculas.utils.animAppear
+import com.estarly.peliculas.utils.getTypeRotation
 import com.estarly.peliculas.utils.listenerScroll
 
 
@@ -83,7 +80,7 @@ class ListMoviesFragment : Fragment() {
         })
         listModel.listMoviesUpcoming.observe(viewLifecycleOwner,{ list->
             adapterUpcoming.setListMovies(list)
-            listBinding.home.recyclerMovies.layoutManager = GridLayoutManager(context,3)
+            listBinding.home.recyclerMovies.layoutManager = GridLayoutManager(context,  if (context!!.getTypeRotation()) 3 else 4)
             listBinding.home.recyclerMovies.setHasFixedSize(true)
             listBinding.home.recyclerMovies.isNestedScrollingEnabled = true
 
