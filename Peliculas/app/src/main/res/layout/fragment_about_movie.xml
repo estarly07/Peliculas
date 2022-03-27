@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="movie"
             type="com.estarly.peliculas.domain.models.Movie" />
 
+        <variable
+            name="wait"
+            type="Boolean" />
     </data>
 
     <RelativeLayout
@@ -14,8 +20,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/handling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{(wait==true)? View.VISIBLE:View.GONE,default=gone}"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/wait" />
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:visibility="@{(wait==false)? View.VISIBLE:View.GONE,default=gone}"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -72,26 +89,27 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20"
+                        android:layout_weight="1"
                         android:background="@drawable/btn_rounded"
                         android:backgroundTint="@color/shadow_bar"
                         android:text="@string/play"
-                        android:layout_marginHorizontal="@dimen/_20"
                         android:textColor="@color/white"
-                        android:layout_weight="1"
                         android:textStyle="bold" />
+
                     <RelativeLayout
+                        style="@style/floating"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:background="@drawable/btn_rounded"
-                        style="@style/floating"
-                        android:gravity="center"
                         android:layout_marginHorizontal="@dimen/_20"
-                        >
+                        android:background="@drawable/btn_rounded"
+                        android:gravity="center">
+
                         <ImageView
                             android:layout_width="@dimen/_20"
                             android:layout_height="@dimen/_20"
-                            android:tint="@color/white"
-                            android:src="@drawable/ic_star"/>
+                            android:src="@drawable/ic_star"
+                            app:tint="@color/white" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -104,6 +122,20 @@
                     android:text="@{movie.overview}"
                     android:textSize="@dimen/_15sp"
                     android:textStyle="normal" />
+
+                <TextView
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10"
+                    android:text="@string/similar"
+                    android:textSize="@dimen/_25sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMoviesSimilar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 

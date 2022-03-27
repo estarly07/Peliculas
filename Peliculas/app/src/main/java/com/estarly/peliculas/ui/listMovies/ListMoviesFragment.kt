@@ -21,6 +21,7 @@ import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
+import com.estarly.peliculas.utils.animAppear
 import com.estarly.peliculas.utils.listenerScroll
 
 
@@ -105,20 +106,9 @@ class ListMoviesFragment : Fragment() {
 
     private fun listeners() {
         navigation = {
-            page = it
-            listBinding.page = page
-            
-            when(it){
-                Pages.HOME->{
-                }
-                Pages.FAVORITES->{
-
-                }
-                Pages.HANDLING->{
-
-                }
-            }
-
+            page   = it
+            listBinding.layout.scheduleLayoutAnimation()
+            listBinding.page = it
         }
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()

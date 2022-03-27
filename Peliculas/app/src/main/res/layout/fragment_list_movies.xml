@@ -15,7 +15,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         style="@style/background"
         android:layout_width="match_parent"
+        android:id="@+id/layout"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_anim_appear"
         tools:context=".ui.listMovies.ListMoviesFragment">
 
 

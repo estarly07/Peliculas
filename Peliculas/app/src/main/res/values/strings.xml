@@ -7,4 +7,5 @@
     <string name="play">Ver Pelicula</string>
     <string name="popular">Populares</string>
     <string name="upcoming">Proximos</string>
+    <string name="similar">Peliculas Similares</string>
 </resources>
