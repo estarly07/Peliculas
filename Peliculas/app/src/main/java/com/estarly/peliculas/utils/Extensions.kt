@@ -69,3 +69,13 @@ fun List<MovieEntity>.movieEntityListToMovieList():List<Movie> {
     }
     return list
 }
+
+/**
+ * saber si esta conectado a la red
+ * return true => con access
+ *        false => sin access
+ */
+fun validateAccessConnection():Boolean{
+    val p = Runtime.getRuntime().exec("ping -c 1 www.google.es")
+    return p.waitFor()==0
+}

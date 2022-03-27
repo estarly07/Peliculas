@@ -1,64 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollHome"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        style="@style/background"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <include
+            android:id="@+id/noFound"
+            layout="@layout/no_found"
+            android:visibility="gone" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollHome"
+            style="@style/background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_450">
-
-                <ImageView
-                    android:id="@+id/imgMovieLatest"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    style="@style/effect"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_450">
+
+                    <ImageView
+                        android:id="@+id/imgMovieLatest"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <RelativeLayout
+                        style="@style/effect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10"
+                    android:text="@string/popular"
+                    android:textSize="@dimen/_25sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMoviesPopular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
+                <TextView
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10"
+                    android:text="@string/upcoming"
+                    android:textSize="@dimen/_25sp"
+                    android:textStyle="bold" />
 
-            </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMovies"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <TextView
-                style="@style/textPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10"
-                android:text="@string/popular"
-                android:textSize="@dimen/_25sp"
-                android:textStyle="bold" />
+            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerMoviesPopular"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 
-            <TextView
-                style="@style/textPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10"
-                android:text="@string/upcoming"
-                android:textSize="@dimen/_25sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerMovies"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
 </layout>

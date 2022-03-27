@@ -21,6 +21,7 @@ import com.estarly.peliculas.ui.adapters.MovieAdapter
 import com.estarly.peliculas.utils.animAppear
 import com.estarly.peliculas.utils.getTypeRotation
 import com.estarly.peliculas.utils.listenerScroll
+import com.estarly.peliculas.utils.validateAccessConnection
 
 
 class ListMoviesFragment : Fragment() {
@@ -65,6 +66,16 @@ class ListMoviesFragment : Fragment() {
 
     private fun getters() {
         listBinding.handling.visibility = View.VISIBLE
+        listBinding.home.noFound.root.visibility = View.GONE
+        listBinding.home.scrollHome.visibility = View.GONE
+        if(!validateAccessConnection()){
+            listBinding.handling.visibility = View.GONE
+            listBinding.home.noFound.root.visibility = View.VISIBLE
+            listBinding.home.scrollHome.visibility = View.GONE
+            return
+        }
+        listBinding.home.noFound.root.visibility = View.GONE
+        listBinding.home.scrollHome.visibility = View.VISIBLE
         listModel.getMovies         ()
         listModel.getMovieLatest    ()
         listModel.getMovieUpcoming  ()
@@ -129,6 +140,10 @@ class ListMoviesFragment : Fragment() {
                 listBinding.handling.visibility = View.VISIBLE
                 listBinding.favorites.noFound.root.visibility = View.GONE
                 listModel.getMoviesFavorites()}
+        }
+        listBinding.home.noFound.title ="No tienes acceso a internet\ntoca el TV para \nintertar otra vez"
+        listBinding.home.noFound.root.setOnClickListener {
+            getters()
         }
         navigation(Pages.HOME)
         adapterMovie   .listenerMovieAdapter()
