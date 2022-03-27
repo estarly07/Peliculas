@@ -8,4 +8,5 @@
     <string name="popular">Populares</string>
     <string name="upcoming">Proximos</string>
     <string name="similar">Peliculas Similares</string>
+    <string name="favoriteMovies">Tus Favoritas</string>
 </resources>

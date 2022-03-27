@@ -18,15 +18,16 @@ import com.estarly.peliculas.databinding.FragmentListMoviesBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
+import com.estarly.peliculas.utils.animAppear
 import com.estarly.peliculas.utils.getTypeRotation
 import com.estarly.peliculas.utils.listenerScroll
 
 
 class ListMoviesFragment : Fragment() {
     enum class Pages{
-        HOME,FAVORITES,HANDLING
+        HOME,FAVORITES
     }
-    private var page:Pages = Pages.HANDLING
+    private var page:Pages = Pages.HOME
     companion object {
         lateinit var navigation: (page: Pages) -> Unit
     }
@@ -35,6 +36,7 @@ class ListMoviesFragment : Fragment() {
     private          val listModel      : ListViewModel by viewModels()
     private          var adapterMovie   : MovieAdapter = MovieAdapter()
     private          var adapterUpcoming: MovieAdapter = MovieAdapter()
+    private          var adapterFavorite: MovieAdapter = MovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,16 +57,17 @@ class ListMoviesFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        listModel.initUsecase(requireContext())
         listeners()
         startObservers()
         getters()
     }
 
     private fun getters() {
-        navigation.invoke(Pages.HANDLING)
-        listModel.getMovies       ()
-        listModel.getMovieLatest  ()
-        listModel.getMovieUpcoming()
+        listBinding.handling.visibility = View.VISIBLE
+        listModel.getMovies         ()
+        listModel.getMovieLatest    ()
+        listModel.getMovieUpcoming  ()
     }
 
 
@@ -75,8 +78,7 @@ class ListMoviesFragment : Fragment() {
             listBinding.home.recyclerMoviesPopular.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
             listBinding.home.recyclerMoviesPopular.setHasFixedSize(true)
             listBinding.home.recyclerMoviesPopular.adapter = adapterMovie
-            if(page!=Pages.FAVORITES)
-                navigation.invoke(Pages.HOME)
+            listBinding.handling.visibility = View.GONE
         })
         listModel.listMoviesUpcoming.observe(viewLifecycleOwner,{ list->
             adapterUpcoming.setListMovies(list)
@@ -85,15 +87,31 @@ class ListMoviesFragment : Fragment() {
             listBinding.home.recyclerMovies.isNestedScrollingEnabled = true
 
             listBinding.home.recyclerMovies.adapter = adapterUpcoming
-            if(page!=Pages.FAVORITES)
-                navigation.invoke(Pages.HOME)
+            listBinding.handling.visibility = View.GONE
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
-            println(list)
+            page = Pages.FAVORITES
+            listBinding.favorites.recyclerMoviesFavorites.visibility = View.VISIBLE
+            if (list.isEmpty() && page == Pages.FAVORITES) {
+                listBinding.favorites.recyclerMoviesFavorites.visibility = View.GONE
+                listBinding.handling.visibility = View.GONE
+
+                listBinding.favorites.noFound.title ="Aun no tienes películas \nfavoritas"
+                listBinding.favorites.noFound.root.animAppear(requireContext(),200)
+                return@observe
+            }
+            adapterFavorite.setListMovies(list)
+            listBinding.favorites.recyclerMoviesFavorites.layoutManager = GridLayoutManager(context,  if (context!!.getTypeRotation()) 3 else 4)
+            listBinding.favorites.recyclerMoviesFavorites.setHasFixedSize(true)
+            listBinding.favorites.recyclerMoviesFavorites.isNestedScrollingEnabled = true
+
+            listBinding.favorites.recyclerMoviesFavorites.adapter = adapterFavorite
+            listBinding.handling.visibility = View.GONE
         })
+
         listModel.movieLatest.observe(viewLifecycleOwner,{ movie->
             Glide.with(context)
-                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+                .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
                 .placeholder(R.drawable.defect_one)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(  listBinding.home.imgMovieLatest)
@@ -106,7 +124,13 @@ class ListMoviesFragment : Fragment() {
             page   = it
             listBinding.layout.scheduleLayoutAnimation()
             listBinding.page = it
+
+            if(page == Pages.FAVORITES){
+                listBinding.handling.visibility = View.VISIBLE
+                listBinding.favorites.noFound.root.visibility = View.GONE
+                listModel.getMoviesFavorites()}
         }
+        navigation(Pages.HOME)
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()
     }
