@@ -69,12 +69,13 @@ class AboutMovieFragment : Fragment() {
     }
 
     private fun getData() {
+        aboutBinding.scroll.post { aboutBinding.scroll.scrollTo(0,  0) }
         Glide.with(context)
             .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
             .error(R.drawable.no_found)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(aboutBinding.imgMovie)
-        aboutModel.getMoviesSimilar(movie.id.toString())
+        aboutModel.getMoviesSimilar(requireContext(),movie.id.toString())
     }
 
 }

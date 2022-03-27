@@ -4,6 +4,7 @@
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollHome"
         android:layout_width="match_parent"
+        style="@style/background"
         android:layout_height="match_parent">
 
         <LinearLayout

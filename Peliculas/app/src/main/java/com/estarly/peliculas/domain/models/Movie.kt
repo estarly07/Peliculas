@@ -6,8 +6,6 @@ data class Movie(
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String,
-    @SerializedName("genre_ids")
-    val genreIDS: List<Long>,
     val id: Long,
     @SerializedName("original_language")
     val originalLanguage: String,

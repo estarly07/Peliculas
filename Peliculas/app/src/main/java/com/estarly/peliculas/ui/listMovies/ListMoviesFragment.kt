@@ -35,6 +35,7 @@ class ListMoviesFragment : Fragment() {
     private          val listModel      : ListViewModel by viewModels()
     private          var adapterMovie   : MovieAdapter = MovieAdapter()
     private          var adapterUpcoming: MovieAdapter = MovieAdapter()
+    private          var adapterFavorite: MovieAdapter = MovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +56,7 @@ class ListMoviesFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        listModel.initUsecase(requireContext())
         listeners()
         startObservers()
         getters()
@@ -62,9 +64,10 @@ class ListMoviesFragment : Fragment() {
 
     private fun getters() {
         navigation.invoke(Pages.HANDLING)
-        listModel.getMovies       ()
-        listModel.getMovieLatest  ()
-        listModel.getMovieUpcoming()
+        listModel.getMovies         ()
+        listModel.getMovieLatest    ()
+        listModel.getMovieUpcoming  ()
+        listModel.getMoviesFavorites()
     }
 
 
@@ -89,8 +92,17 @@ class ListMoviesFragment : Fragment() {
                 navigation.invoke(Pages.HOME)
         })
         listModel.listMoviesFavorites.observe(viewLifecycleOwner,{ list->
-            println(list)
+            println("li $list")
+            adapterFavorite.setListMovies(list)
+            listBinding.favorites.recyclerMoviesFavorites.layoutManager = GridLayoutManager(context,  if (context!!.getTypeRotation()) 3 else 4)
+            listBinding.favorites.recyclerMoviesFavorites.setHasFixedSize(true)
+            listBinding.favorites.recyclerMoviesFavorites.isNestedScrollingEnabled = true
+
+            listBinding.favorites.recyclerMoviesFavorites.adapter = adapterFavorite
+            if(page!=Pages.FAVORITES)
+                navigation.invoke(Pages.HOME)
         })
+
         listModel.movieLatest.observe(viewLifecycleOwner,{ movie->
             Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")

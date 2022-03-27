@@ -31,6 +31,7 @@
             app:lottie_rawRes="@raw/wait" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:visibility="@{(wait==false)? View.VISIBLE:View.GONE,default=gone}"
             android:layout_height="match_parent">

@@ -2,6 +2,7 @@ package com.estarly.peliculas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.databinding.DataBindingUtil
 import com.estarly.peliculas.databinding.ActivityMainBinding
 import com.estarly.peliculas.ui.listMovies.ListMoviesFragment

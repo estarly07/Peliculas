@@ -1,5 +1,6 @@
 package com.estarly.peliculas.ui.listMovies
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.estarly.peliculas.data.usecases.UseCase
@@ -10,12 +11,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
-    private val useCase     = UseCase()
+    private lateinit var useCase : UseCase
 
     var listMovies          = MutableLiveData<List<Movie>>()
     var listMoviesUpcoming  = MutableLiveData<List<Movie>>()
-    var listMoviesFavorites = MutableLiveData<List<String>>()
+    var listMoviesFavorites = MutableLiveData<List<Movie>>()
     val movieLatest         = MutableLiveData<Movie>()
+    fun initUsecase(context: Context) {
+        useCase = UseCase(context)
+    }
 
     fun getMovies() = GlobalScope.launch(Dispatchers.IO) {
             listMovies.postValue(
@@ -24,8 +28,8 @@ class ListViewModel : ViewModel() {
                 else listMovies.value)
         }
 
-    fun getMoviesFavorites() = CoroutineScope(Dispatchers.Main).launch {
-            listMoviesFavorites.value = listOf("","")
+    fun getMoviesFavorites() = CoroutineScope(Dispatchers.IO).launch {
+            listMoviesFavorites.postValue(useCase.getFavoritesMovies() as List<Movie>)
         }
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {
             movieLatest.postValue(if(movieLatest.value == null) useCase.getMovieLatest()else movieLatest.value)
