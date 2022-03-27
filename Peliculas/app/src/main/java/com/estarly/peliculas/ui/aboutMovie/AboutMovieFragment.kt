@@ -24,6 +24,7 @@ class AboutMovieFragment : Fragment() {
     private lateinit var aboutBinding : FragmentAboutMovieBinding
     private          val aboutModel   : AboutViewModel by viewModels()
     private          val adapterMovie = MovieAdapter()
+    private var isFavorite = false
     companion object {
         private lateinit var movie: Movie
         fun setMovie(movie: Movie) {
@@ -44,7 +45,6 @@ class AboutMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         aboutBinding.wait = false
         aboutBinding.movie = movie
-
         adapterMovie.setClick(object : MovieAdapter.Click{
             override fun onClick(movie: Movie, view: View) {
                 aboutBinding.wait = true
@@ -66,12 +66,29 @@ class AboutMovieFragment : Fragment() {
             aboutBinding.recyclerMoviesSimilar.adapter = adapterMovie
             aboutBinding.wait = false
         })
+        aboutModel.isFavorite.observe(viewLifecycleOwner,{
+            isFavorite = it
+            aboutBinding.btnStar.visibility = View.VISIBLE
+            if(it)
+                aboutBinding.star.playAnimation()
+        })
         aboutBinding.btnStar.setOnClickListener {
-            aboutModel.insertMovie(movie)
+            if (isFavorite){
+                aboutBinding.star.progress =0f
+                aboutBinding.star.pauseAnimation()
+                aboutModel.deleteMovie(movie)
+            }
+            else{
+                aboutBinding.star.playAnimation()
+                aboutModel.insertMovie(movie)
+            }
+            isFavorite = !isFavorite
         }
     }
 
     private fun getData() {
+        aboutBinding.btnStar.visibility = View.INVISIBLE
+        aboutModel.getMovie(movie.id)
         aboutBinding.scroll.post { aboutBinding.scroll.scrollTo(0,  0) }
         Glide.with(context)
             .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")

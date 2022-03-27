@@ -30,7 +30,6 @@ class ListViewModel : ViewModel() {
         }
 
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.IO).launch {
-            Thread.sleep(2000)
             listMoviesFavorites.postValue(useCase.getFavoritesMovies().movieEntityListToMovieList())
         }
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {

@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 class AboutViewModel : ViewModel() {
     private lateinit var useCase  :UseCase
     var listMoviesSimilar = MutableLiveData<List<Movie>>()
+    var isFavorite        = MutableLiveData<Boolean>()
 
 
     fun getMoviesSimilar(context: Context, idMovie:String) = GlobalScope.launch(Dispatchers.IO) {
@@ -28,5 +29,12 @@ class AboutViewModel : ViewModel() {
         useCase.insertMovie(movie.movieToMovieEntity())
 
     }
+    fun getMovie(idMovie: Long) = GlobalScope.launch(Dispatchers.Main) {
+        isFavorite.postValue(useCase.getMovie(idMovie)!=null)
 
+    }
+
+    fun deleteMovie(movie: Movie) = GlobalScope.launch(Dispatchers.Main) {
+        useCase.deleteMovie(movie.id)
+    }
 }

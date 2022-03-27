@@ -133,6 +133,7 @@ class ListMoviesFragment : Fragment() {
         navigation(Pages.HOME)
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()
+        adapterFavorite.listenerMovieAdapter()
     }
     private fun MovieAdapter.listenerMovieAdapter() =
         this.setClick(object:MovieAdapter.Click{

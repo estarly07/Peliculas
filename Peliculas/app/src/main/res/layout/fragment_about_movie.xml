@@ -107,11 +107,13 @@
                         android:background="@drawable/btn_rounded"
                         android:gravity="center">
 
-                        <ImageView
-                            android:layout_width="@dimen/_20"
-                            android:layout_height="@dimen/_20"
-                            android:src="@drawable/ic_star"
-                            app:tint="@color/white" />
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:lottie_rawRes="@raw/star"
+                            android:id="@+id/star"
+                            app:lottie_autoPlay="false"
+                            />
                     </RelativeLayout>
 
                 </LinearLayout>

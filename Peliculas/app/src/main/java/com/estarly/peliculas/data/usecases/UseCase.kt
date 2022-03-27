@@ -75,6 +75,9 @@ class UseCase(context: Context) {
     suspend fun insertMovie (movieEntity: MovieEntity) : Long{
         return movieDao.registerMovie(movieEntity)
     }
+    suspend fun getMovie (idMovie: Long) : MovieEntity?{
+        return movieDao.getMovie(idMovie)
+    }
     suspend fun deleteMovie (idMovie: Long) {
         return movieDao.deleteMovie(idMovie)
     }
