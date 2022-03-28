@@ -21,8 +21,9 @@ import com.estarly.peliculas.ui.aboutMovie.AboutMovieFragment
 import com.estarly.peliculas.ui.adapters.MovieAdapter
 import com.estarly.peliculas.utils.getTypeRotation
 import com.estarly.peliculas.utils.listenerScroll
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ListMoviesFragment : Fragment() {
     enum class Pages{
         HOME,FAVORITES
@@ -60,7 +61,6 @@ class ListMoviesFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listModel.initUsecase(requireContext())
         listBinding.favorites.noFound.title ="Aun no tienes películas \nfavoritas"
         initAttributesRecycler()
         listeners()

@@ -1,6 +1,5 @@
 package com.estarly.peliculas.ui.listMovies
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.estarly.peliculas.data.usecases.UseCase
@@ -9,19 +8,20 @@ import com.estarly.peliculas.utils.GlobalUtils
 import com.estarly.peliculas.utils.movieEntityListToMovieList
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.io.IOException
+import javax.inject.Inject
 
-class ListViewModel : ViewModel() {
-    private lateinit var useCase : UseCase
+@HiltViewModel
+class ListViewModel @Inject constructor(
+    private var useCase: UseCase
+) : ViewModel() {
 
     var listMovies          = MutableLiveData<List<Movie>>()
     var listMoviesUpcoming  = MutableLiveData<List<Movie>>()
     var listMoviesFavorites = MutableLiveData<List<Movie>>()
     val movieLatest         = MutableLiveData<Movie?>()
-    fun initUsecase(context: Context) {
-        useCase = UseCase(context)
-    }
 
     fun getMovies() = CoroutineScope(Dispatchers.IO).launch {
         if (listMovies.value?.isEmpty() == true || listMovies.value == null) {

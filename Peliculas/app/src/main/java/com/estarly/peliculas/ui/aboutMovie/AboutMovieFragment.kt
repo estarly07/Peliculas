@@ -15,8 +15,9 @@ import com.estarly.peliculas.databinding.FragmentAboutMovieBinding
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.ui.adapters.MovieAdapter
 import com.estarly.peliculas.utils.getTypeRotation
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AboutMovieFragment : Fragment() {
     private lateinit var aboutBinding : FragmentAboutMovieBinding
     private          val aboutModel   : AboutViewModel by viewModels()
@@ -79,8 +80,8 @@ class AboutMovieFragment : Fragment() {
             .error(R.drawable.no_found)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(aboutBinding.imgMovie)
-        aboutModel.getMoviesSimilar(requireContext(),movie.id.toString())
-        isFavorite = aboutModel.getMovie(movie.id,requireContext())
+        aboutModel.getMoviesSimilar(movie.id.toString())
+        isFavorite = aboutModel.getMovie(movie.id)
         animateStar(isFavorite)
 
     }

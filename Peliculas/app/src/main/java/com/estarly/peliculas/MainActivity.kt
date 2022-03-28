@@ -10,7 +10,9 @@ import com.estarly.peliculas.ui.listMovies.ListMoviesFragment
 import com.estarly.peliculas.utils.animAppear
 import com.estarly.peliculas.utils.animTranslateToBottomOrUp
 import com.estarly.peliculas.utils.animVanish
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     companion object{
