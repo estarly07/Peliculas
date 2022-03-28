@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10">
+
+        <RelativeLayout
+            android:layout_width="@dimen/_150"
+            android:layout_height="@dimen/_150">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_centerInParent="true"
+                app:riv_corner_radius="15dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                style="@style/effect_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                app:riv_corner_radius="15dp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

@@ -3,10 +3,12 @@ package com.estarly.peliculas.ui.listMovies
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.estarly.peliculas.data.sharedPreferences.SharedPreferences
 import com.estarly.peliculas.data.usecases.UseCase
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.utils.GlobalUtils
 import com.estarly.peliculas.utils.movieEntityListToMovieList
+import com.estarly.peliculas.utils.showToast
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private var useCase: UseCase
+    private var useCase: UseCase,
+    private var sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
     var listMovies          = MutableLiveData<List<Movie>>()
@@ -80,6 +83,8 @@ class ListViewModel @Inject constructor(
 
             }
         }
+
+    fun getAvatar(): Int = sharedPreferences.getAvatar()
 
 
 }

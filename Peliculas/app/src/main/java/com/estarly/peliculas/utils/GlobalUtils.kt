@@ -1,11 +1,24 @@
 package com.estarly.peliculas.utils
 
+import com.estarly.peliculas.R
+
 class GlobalUtils {
     companion object{
         const val baseUrl  = "https://api.themoviedb.org"
         const val apiKey   = "afa8d95ee641e17726d410fb729bc2b2"
         const val language = "es-ES"
         const val error    = "ERROR"
+         val avatars = listOf(
+            R.drawable.a,
+            R.drawable.b,
+            R.drawable.c,
+            R.drawable.d,
+            R.drawable.e,
+            R.drawable.f,
+            R.drawable.g,
+            R.drawable.h,
+            R.drawable.r,
+        )
         const val movies   = "[{\n" +
                 "            \"adult\": false,\n" +
                 "            \"backdrop_path\": \"/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg\",\n" +

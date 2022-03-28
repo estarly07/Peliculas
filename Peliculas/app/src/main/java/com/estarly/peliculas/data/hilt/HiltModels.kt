@@ -1,6 +1,7 @@
 package com.estarly.peliculas.data.hilt
 
 import android.content.Context
+import com.estarly.peliculas.data.sharedPreferences.SharedPreferences
 import com.estarly.peliculas.data.usecases.UseCase
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,12 @@ class HiltModels {
     @Provides
     fun providerUseCase(@ApplicationContext context: Context) : UseCase{
         return  UseCase(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context):SharedPreferences{
+        return SharedPreferences(context)
     }
 
 }

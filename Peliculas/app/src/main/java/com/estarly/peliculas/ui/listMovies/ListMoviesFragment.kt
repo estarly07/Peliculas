@@ -62,6 +62,14 @@ class ListMoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listBinding.favorites.noFound.title ="Aun no tienes películas \nfavoritas"
+        val avatar = listModel.getAvatar()
+        if(avatar != -1){
+            Glide.with(context)
+                .load(avatar)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(listBinding.avatar)
+        }
+
         initAttributesRecycler()
         listeners()
         startObservers()
@@ -159,6 +167,10 @@ class ListMoviesFragment : Fragment() {
             getters()
         }
         navigation(Pages.HOME)
+        listBinding.avatar.setOnClickListener{
+            MainActivity.callback.invoke(false)
+            NavHostFragment.findNavController(this).navigate(R.id.listMovies_to_avatars)
+        }
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()
         adapterFavorite.listenerMovieAdapter()

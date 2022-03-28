@@ -1,9 +1,13 @@
 package com.estarly.peliculas.utils
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.Surface
 import android.view.WindowManager
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
+import com.estarly.peliculas.R
 import com.estarly.peliculas.domain.entities.MovieEntity
 import com.estarly.peliculas.domain.models.Movie
 
@@ -25,6 +29,16 @@ fun Context.getTypeRotation():Boolean =
         Surface.ROTATION_0,Surface.ROTATION_180-> true
         else->false
     }
+
+fun String.showToast(context: Context){
+    val toast = Toast(context)
+    val view = LayoutInflater.from(context).inflate(R.layout.toast,null,false)
+    toast.duration = Toast.LENGTH_SHORT
+    val text = view.findViewById<TextView>(R.id.msg)
+    text.text = this
+    toast.view = view
+    toast.show()
+}
 
 /**
  * return devuelve un objeto movie
