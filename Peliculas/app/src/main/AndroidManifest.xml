@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Peliculas">
         <activity
             android:name="com.estarly.peliculas.MainActivity"
+            android:theme="@style/SplasTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

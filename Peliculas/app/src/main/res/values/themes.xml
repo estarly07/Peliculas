@@ -47,4 +47,7 @@
         <item name="drawableTint">@color/navigation_icon_select</item>
         <item name="android:textColor">@color/navigation_icon_select</item>
     </style>
+    <style name="SplasTheme" parent="Theme.Peliculas">
+        <item name="android:windowBackground">@drawable/splash_light</item>
+    </style>
 </resources>

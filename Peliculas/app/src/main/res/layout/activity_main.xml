@@ -5,50 +5,61 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/background"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/containerFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <RelativeLayout
+            android:id="@+id/app"
+            style="@style/background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation" />
+            tools:context=".MainActivity">
 
-        <LinearLayout
-            android:id="@+id/navigatorBar"
-            style="@style/navigation_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_home"
-                style="@style/navigation_icon"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/containerFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_home"
-                android:text="@string/home"
-                android:textSize="15sp" />
+                android:layout_centerInParent="true"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/navigation" />
 
-            <Button
-                android:id="@+id/btn_favorites"
-                style="@style/navigation_icon"
+            <LinearLayout
+                android:id="@+id/navigatorBar"
+                style="@style/navigation_bar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_star"
-                android:text="@string/favorite"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_home"
+                    style="@style/navigation_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_home"
+                    android:text="@string/home"
+                    android:textSize="15sp" />
 
+                <Button
+                    android:id="@+id/btn_favorites"
+                    style="@style/navigation_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_star"
+                    android:text="@string/favorite"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/splash"
+            layout="@layout/splash" />
     </RelativeLayout>
+
 </layout>

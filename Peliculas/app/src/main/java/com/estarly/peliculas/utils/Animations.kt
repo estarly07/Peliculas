@@ -24,3 +24,14 @@ fun View.animAppear(context: Context, duration: Int): Unit {
     this.visibility     = View.VISIBLE
     this.animation      = animations
 }
+/**EXTENSION PARA OCULTAR UNA VIEW CON UNA ANIMACIÓN
+ * @param context
+ * @param duration duracion de cuanto tiempo va a tardar la animacion
+ * */
+fun View.animVanish(context: Context, duration: Int): Unit {
+    val animations      = AnimationUtils.loadAnimation(context, R.anim.anim_vanish)
+    animations.duration = duration.toLong()
+
+    this.visibility     = View.GONE
+    this.animation      = animations
+}
