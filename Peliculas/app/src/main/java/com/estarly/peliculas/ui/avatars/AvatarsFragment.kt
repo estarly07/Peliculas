@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.estarly.peliculas.MainActivity
 import com.estarly.peliculas.R
 import com.estarly.peliculas.databinding.FragmentAvatarsBinding
 import com.estarly.peliculas.ui.adapters.AvatarAdapter
@@ -28,6 +29,10 @@ class AvatarsFragment : Fragment() {
         return avatarBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        MainActivity.callback.invoke(false)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         avatarBinding.recyclerAvatar.setHasFixedSize(true)

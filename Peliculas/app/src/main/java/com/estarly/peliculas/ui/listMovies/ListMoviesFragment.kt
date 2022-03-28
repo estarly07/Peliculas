@@ -1,6 +1,7 @@
 package com.estarly.peliculas.ui.listMovies
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -89,8 +90,9 @@ class ListMoviesFragment : Fragment() {
     }
     /**
      * Obtener la informacion del api
+     * @param isRefresh saber si quiere obtener otra vez los datos del api
      */
-    private fun getters() {
+    private fun getters(isRefresh: Boolean = false) {
         listBinding.handling.visibility  = View.VISIBLE
         listBinding.home.isEmptyPopular  = true
         listBinding.home.isEmptyUpcoming = true
@@ -98,8 +100,9 @@ class ListMoviesFragment : Fragment() {
 
         listModel.getMovieLatest    ()
 
-        listModel.getMovies         ()
-        listModel.getMovieUpcoming  ()
+        listModel.getMovies         (isRefresh)
+        listModel.getMovieUpcoming  (isRefresh)
+        listBinding.home.swiperefresh.isRefreshing = false
     }
 
     /**
@@ -158,12 +161,14 @@ class ListMoviesFragment : Fragment() {
             listBinding.page = it
 
             if(page == Pages.FAVORITES){
+                MainActivity.callback.invoke(true)
                 listBinding.handling.visibility = View.VISIBLE
                 listBinding.favorites.noFound.root.visibility = View.GONE
                 listModel.getMoviesFavorites()}
         }
         listBinding.home.noFound.title = context!!.resources.getString(R.string.no_get_movies)
         listBinding.home.noFound.root.setOnClickListener {
+            MainActivity.callback.invoke(true)
             getters()
         }
         navigation(Pages.HOME)
@@ -171,6 +176,10 @@ class ListMoviesFragment : Fragment() {
             MainActivity.callback.invoke(false)
             NavHostFragment.findNavController(this).navigate(R.id.listMovies_to_avatars)
         }
+        listBinding.home.swiperefresh.setOnRefreshListener {
+            getters(isRefresh = true)
+        }
+
         adapterMovie   .listenerMovieAdapter()
         adapterUpcoming.listenerMovieAdapter()
         adapterFavorite.listenerMovieAdapter()

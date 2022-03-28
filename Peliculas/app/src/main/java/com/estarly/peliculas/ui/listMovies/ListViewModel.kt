@@ -28,9 +28,10 @@ class ListViewModel @Inject constructor(
 
     /**
      * Obterner peliculas populares
+     * @param isRefresh saber si quiere obtener otra vez los datos del api
      */
-    fun getMovies() = CoroutineScope(Dispatchers.IO).launch {
-        if (listMovies.value?.isEmpty() == true || listMovies.value == null) {
+    fun getMovies(isRefresh:Boolean = false) = CoroutineScope(Dispatchers.IO).launch {
+        if (listMovies.value?.isEmpty() == true || listMovies.value == null ||  isRefresh) {
                 try {
                     val resp = useCase.getMovies()
                     listMovies.postValue(resp)
@@ -38,7 +39,7 @@ class ListViewModel @Inject constructor(
                     Log.e(GlobalUtils.error, "getMovies ${e.printStackTrace()}", )
                     val type = object : TypeToken<List<Movie>>() {}.type
                     val gson = GsonBuilder().create()
-                    listMovies.postValue(listOf())
+                    listMovies.postValue(gson.fromJson(GlobalUtils.movies,type))
                 }
 
             }
@@ -72,9 +73,10 @@ class ListViewModel @Inject constructor(
 
     /**
      * Obtener proximas peliculas
+     * @param isRefresh saber si quiere obtener otra vez los datos del api
      */
-    fun getMovieUpcoming() = CoroutineScope(Dispatchers.IO).launch {
-            if(listMoviesUpcoming.value?.isEmpty() == true || listMovies.value == null ){
+    fun getMovieUpcoming(isRefresh:Boolean = false) = CoroutineScope(Dispatchers.IO).launch {
+            if(listMoviesUpcoming.value?.isEmpty() == true || listMovies.value == null || isRefresh){
                 try {
                     val resp = useCase.getMovieUpcoming()
                     listMoviesUpcoming.postValue(resp)
