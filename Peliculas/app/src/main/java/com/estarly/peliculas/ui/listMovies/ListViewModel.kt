@@ -8,7 +8,6 @@ import com.estarly.peliculas.data.usecases.UseCase
 import com.estarly.peliculas.domain.models.Movie
 import com.estarly.peliculas.utils.GlobalUtils
 import com.estarly.peliculas.utils.movieEntityListToMovieList
-import com.estarly.peliculas.utils.showToast
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +38,7 @@ class ListViewModel @Inject constructor(
                     Log.e(GlobalUtils.error, "getMovies ${e.printStackTrace()}", )
                     val type = object : TypeToken<List<Movie>>() {}.type
                     val gson = GsonBuilder().create()
-                    listMovies.postValue(gson.fromJson(GlobalUtils.movies,type))
+                    listMovies.postValue(listOf())
                 }
 
             }
@@ -59,7 +58,10 @@ class ListViewModel @Inject constructor(
             if(movieLatest.value == null){
                 try {
                     val resp = useCase.getMovieLatest()
-                    movieLatest.postValue(resp)
+                    if(resp.adult){
+                        movieLatest.postValue(null)
+                    }else
+                        movieLatest.postValue(resp)
                 }catch (e: IOException){
                     Log.e(GlobalUtils.error, "movieLatest${e.printStackTrace()}", )
                     movieLatest.postValue(null)

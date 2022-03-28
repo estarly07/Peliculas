@@ -16,6 +16,7 @@
         <activity
             android:name="com.estarly.peliculas.MainActivity"
             android:theme="@style/SplasTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -36,7 +36,7 @@ class AvatarsFragment : Fragment() {
         avatarAdapter.setClick(object : AvatarAdapter.Click{
             override fun onClick(avatar: Int, view: View) {
                 avatarsViewModel.chooseAvatar(avatar)
-                "Avatar seleccionado".showToast(requireContext())
+                getString(R.string.choose_avatar).showToast(requireContext())
             }
         })
         

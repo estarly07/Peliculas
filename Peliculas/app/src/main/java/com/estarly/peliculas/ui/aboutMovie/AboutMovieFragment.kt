@@ -34,7 +34,6 @@ class AboutMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         aboutBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_about_movie, container, false)
         return aboutBinding.root
     }
@@ -54,8 +53,7 @@ class AboutMovieFragment : Fragment() {
         aboutModel.listMoviesSimilar.observe(viewLifecycleOwner,{list->
             aboutBinding.isEmptyList = list.isEmpty()
             adapterMovie.setListMovies(list)
-            aboutBinding.recyclerMoviesSimilar.layoutManager = GridLayoutManager(context,
-                if (context!!.getTypeRotation()) 3 else 4)
+            aboutBinding.recyclerMoviesSimilar.layoutManager = GridLayoutManager(context,3 )
             aboutBinding.recyclerMoviesSimilar.setHasFixedSize(true)
             aboutBinding.recyclerMoviesSimilar.isNestedScrollingEnabled = true
 

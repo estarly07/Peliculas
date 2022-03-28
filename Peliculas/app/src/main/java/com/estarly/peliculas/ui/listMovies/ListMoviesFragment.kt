@@ -61,7 +61,7 @@ class ListMoviesFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listBinding.favorites.noFound.title ="Aun no tienes películas \nfavoritas"
+        listBinding.favorites.noFound.title =context!!.resources.getString(R.string.no_get_movies_favorites)
         val avatar = listModel.getAvatar()
         if(avatar != -1){
             Glide.with(context)
@@ -162,7 +162,7 @@ class ListMoviesFragment : Fragment() {
                 listBinding.favorites.noFound.root.visibility = View.GONE
                 listModel.getMoviesFavorites()}
         }
-        listBinding.home.noFound.title ="No se pudo obtener peliculas\n\ntoca el TV para \nintertar otra vez"
+        listBinding.home.noFound.title = context!!.resources.getString(R.string.no_get_movies)
         listBinding.home.noFound.root.setOnClickListener {
             getters()
         }
@@ -203,7 +203,7 @@ class ListMoviesFragment : Fragment() {
      */
     private fun appearWarning(){
         if(appearWarning == 2 && !bothListEmpty.contains(false)){
-            listBinding.home.noFound.title ="No se pudo obtener peliculas\n\ntoca el TV para \nintertar otra vez"
+            listBinding.home.noFound.title = context!!.resources.getString(R.string.no_get_movies)
             listBinding.home.noFound.root.visibility = View.VISIBLE
             bothListEmpty[0] = false
             bothListEmpty[1] = false

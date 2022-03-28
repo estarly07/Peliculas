@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Peliculas</string>
-    <string name="home">Menu</string>
-    <string name="favorite">Favoritos</string>
-    <string name="play">Ver Pelicula</string>
-    <string name="popular">Populares</string>
-    <string name="upcoming">Proximos</string>
-    <string name="similar">Peliculas Similares</string>
-    <string name="favoriteMovies">Tus Favoritas</string>
+    <string name="app_name">Movies</string>
+    <string name="home">Home</string>
+    <string name="favorite">favorites</string>
+    <string name="play">Watch movie</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="similar">Similar Movies</string>
+    <string name="favoriteMovies">Your Favorites</string>
     <string name="moviesDefault">[{
             "adult": false,
             "backdrop_path": "/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg",
@@ -414,8 +415,8 @@
             "vote_average": 6.8,
             "vote_count": 58
         }]</string>
-    <string name="avatar">Escoge tu avatar</string>
-    <string name="choose_avatar">Avatar seleccionado</string>
-    <string name="no_get_movies">No se pudo obtener peliculas\n\ntoca el TV para \nintentar otra vez</string>
-    <string name="no_get_movies_favorites">Aun no tienes películas \nfavoritas</string>
+    <string name="avatar">Choose your avatar</string>
+    <string name="choose_avatar">selected avatar</string>
+    <string name="no_get_movies">Could not get movies\n\ntouch the TV to \ntry again</string>
+    <string name="no_get_movies_favorites">You dont have favorite movies \nyet</string>
 </resources>
