@@ -94,6 +94,9 @@ class ListMoviesFragment : Fragment() {
         listModel.getMovieUpcoming  ()
     }
 
+    /**
+     * iniciar los observers a las variables livedata que contienen los arrays de las listas de las peliculas
+     */
     private fun startObservers() {
         listBinding.home.scrollHome.listenerScroll { MainActivity.callback.invoke(it) }
         listModel.listMovies.observe(viewLifecycleOwner,{ list->

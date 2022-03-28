@@ -7,8 +7,12 @@ import androidx.core.widget.NestedScrollView
 import com.estarly.peliculas.domain.entities.MovieEntity
 import com.estarly.peliculas.domain.models.Movie
 
+/**
+ * listener para cuando haga scroll
+ *@param callback funcion que se va a llamar cuando haga scroll
+ */
 fun NestedScrollView.listenerScroll(callback: (isUp:Boolean ) -> Unit) {
-    this.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+    this.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
         callback.invoke(scrollY < oldScrollY)
     })
 }

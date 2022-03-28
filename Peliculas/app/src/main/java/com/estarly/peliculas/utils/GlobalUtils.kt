@@ -5,6 +5,7 @@ class GlobalUtils {
         const val baseUrl  = "https://api.themoviedb.org"
         const val apiKey   = "afa8d95ee641e17726d410fb729bc2b2"
         const val language = "es-ES"
+        const val error    = "ERROR"
         const val movies   = "[{\n" +
                 "            \"adult\": false,\n" +
                 "            \"backdrop_path\": \"/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg\",\n" +

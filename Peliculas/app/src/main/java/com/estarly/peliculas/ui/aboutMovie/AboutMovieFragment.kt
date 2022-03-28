@@ -73,6 +73,9 @@ class AboutMovieFragment : Fragment() {
         }
     }
 
+    /**
+     * Obtener info de la pelicula seleccionada
+     */
     private fun getData() {
         aboutBinding.scroll.post { aboutBinding.scroll.scrollTo(0,  0) }
         Glide.with(context)
@@ -86,6 +89,10 @@ class AboutMovieFragment : Fragment() {
 
     }
 
+    /**
+     * Animar las estrella de acuerdo si es favorita o no
+     * @param isFavorite
+     */
     private fun animateStar(isFavorite : Boolean){
         if (isFavorite){
             aboutBinding.star.playAnimation()

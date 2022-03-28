@@ -24,7 +24,8 @@ class UseCase(context: Context) {
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query"    to "B"
+                "query"    to "B",
+                "adult"    to "false"
             )
         )
         val type = object : TypeToken<List<Movie>>() {}.type
@@ -38,7 +39,8 @@ class UseCase(context: Context) {
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query"    to "B"
+                "query"    to "B",
+                "adult"    to "false"
             )
         )
         val type = object : TypeToken<Movie>() {}.type
@@ -52,7 +54,8 @@ class UseCase(context: Context) {
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query"    to "B"
+                "query"    to "B",
+                "adult"    to "false"
             )
         )
         val type = object : TypeToken<List<Movie>>() {}.type
@@ -67,7 +70,8 @@ class UseCase(context: Context) {
             mapOf(
                 "api_key"  to GlobalUtils.apiKey,
                 "language" to GlobalUtils.language,
-                "query"    to "B"
+                "query"    to "B",
+                "adult"    to "false"
             )
         )
         val type = object : TypeToken<List<Movie>>() {}.type

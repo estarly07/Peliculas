@@ -1,5 +1,6 @@
 package com.estarly.peliculas.ui.listMovies
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.estarly.peliculas.data.usecases.UseCase
@@ -23,13 +24,16 @@ class ListViewModel @Inject constructor(
     var listMoviesFavorites = MutableLiveData<List<Movie>>()
     val movieLatest         = MutableLiveData<Movie?>()
 
+    /**
+     * Obterner peliculas populares
+     */
     fun getMovies() = CoroutineScope(Dispatchers.IO).launch {
         if (listMovies.value?.isEmpty() == true || listMovies.value == null) {
                 try {
                     val resp = useCase.getMovies()
                     listMovies.postValue(resp)
                 }catch (e: IOException){
-                    e.printStackTrace()
+                    Log.e(GlobalUtils.error, "getMovies ${e.printStackTrace()}", )
                     val type = object : TypeToken<List<Movie>>() {}.type
                     val gson = GsonBuilder().create()
                     listMovies.postValue(gson.fromJson(GlobalUtils.movies,type))
@@ -38,28 +42,39 @@ class ListViewModel @Inject constructor(
             }
         }
 
+    /**
+     * Obtener las peliculas guardadas como favoritas por el usuario
+     */
     fun getMoviesFavorites() = CoroutineScope(Dispatchers.IO).launch {
             listMoviesFavorites.postValue(useCase.getFavoritesMovies().movieEntityListToMovieList())
         }
+
+    /**
+     * Obtener la ultima pelicula que tiene el api
+     */
     fun getMovieLatest() = CoroutineScope(Dispatchers.IO).launch {
             if(movieLatest.value == null){
                 try {
                     val resp = useCase.getMovieLatest()
                     movieLatest.postValue(resp)
                 }catch (e: IOException){
-                    e.printStackTrace()
+                    Log.e(GlobalUtils.error, "movieLatest${e.printStackTrace()}", )
                     movieLatest.postValue(null)
                 }
 
             }
         }
+
+    /**
+     * Obtener proximas peliculas
+     */
     fun getMovieUpcoming() = CoroutineScope(Dispatchers.IO).launch {
             if(listMoviesUpcoming.value?.isEmpty() == true || listMovies.value == null ){
                 try {
                     val resp = useCase.getMovieUpcoming()
                     listMoviesUpcoming.postValue(resp)
                 }catch (e: IOException){
-                    e.printStackTrace()
+                    Log.e(GlobalUtils.error, "getMovieUpcoming ${e.printStackTrace()}", )
                     listMoviesUpcoming.postValue(listOf())
                 }
 
